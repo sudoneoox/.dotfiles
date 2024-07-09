@@ -1,0 +1,1 @@
+return require "fishlive.colorscheme".eighties_one_dark
