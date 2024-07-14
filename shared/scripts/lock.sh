@@ -25,7 +25,7 @@ for screen in $screens; do
 done
 
 maim -u -m 1 \
-    | convert png:- -scale 10% -scale 1000% \
+    | magick  png:- -scale 10% -scale 1000% \
     -fill "#282828" -colorize 10% \
     ${lines[*]} "$image"
 
