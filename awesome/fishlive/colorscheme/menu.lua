@@ -37,10 +37,10 @@ menu.prepare_colorscheme_menu = function()
             '@theme "'..homeDir..'/.config/rofi/multicolor-'..cs.scheme_id..'.rasi"'
           )
           -- change conky theme
-          writeToFile(
-            homeDir .. "/.config/conky/MX-CoreBlue/conkytheme.lua",
-            "return { color0 = '"..cs.base07.."', color1 = '" .. cs.leading_fg .. "' }"
-          )
+          -- writeToFile(
+          --   homeDir .. "/.config/conky/MX-CoreBlue/conkytheme.lua",
+          --   "return { color0 = '"..cs.base07.."', color1 = '" .. cs.leading_fg .. "' }"
+          -- )
           -- restart AWESOME
           awesome.restart()
         end

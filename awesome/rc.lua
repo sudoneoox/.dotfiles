@@ -900,10 +900,10 @@ end)
 --awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 awful.spawn.with_shell("dex --environment Awesome --autostart")
 awful.util.spawn_with_shell("flameshot")
-awful.util.spawn_with_shell("picom --conf ~/.config/picom/conf")
+-- awful.util.spawn_with_shell("picom --conf ~/.config/picom/conf")
 awful.util.spawn_with_shell("clipmenud &")
 awful.util.spawn_with_shell("blueman-applet &")
 awful.util.spawn_with_shell("nm-applet &")
 awful.util.spawn_with_shell("dbus-update-activation-environment DISPLAY")
-awful.util.spawn_with_shell("caffeine &")
---}}}
+awful.util.spawn_with_shell("start_caffeine.sh")
+
