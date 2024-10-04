@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 WD=$(pwd)
 
 # Define the config directories to sync
-CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nixos")
+CONFIGS=("fish" "kitty" "awesome" "rofi" "picom" "nix")
 
 # Function to display the menu
 display_menu() {
@@ -40,7 +40,7 @@ sync_config() {
     
     # Create new backup
     mkdir -p "$WD/$config/.backup"
-    cp -R "$HOME/.config/$config"/* "$WD/$config/.backup/" 2>/dev/null
+    cp -R "$HOME/.config/$config/"* "$WD/$config/.backup/" 2>/dev/null
     
     # Sync files
     rsync -av --delete "$HOME/.config/$config/" "$WD/$config/" --exclude .backup
