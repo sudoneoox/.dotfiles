@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 DEPENDENCY_PACKAGES=(
   "xorg" "xorg-xinit" "xterm" "git" "polkit" "polkit-gnome" "alsa-utils"
   "pulseaudio" "pulseaudio-alsa" "pavucontrol" "pipewire" "pipewire-pulse"
-  "arandr" "at" "acpi" "git" "brightnessctl"
+  "arandr" "at" "acpi" "git" "brightnessctl" "rsync"
 )
 
 AUR_PACKAGES=(
@@ -26,7 +26,7 @@ FONT_PACKAGES=(
 
 CORE_PACKAGES=(
   "webkit2gtk-4.1" "networkmanager-openconnect" "localsend-bin" "cups"
-  "btop" "bat" "filelight" "syncthing" "neovim"
+  "btop" "bat" "filelight" "syncthing" "neovim" "tldr"
 )
 
 NVIM_CONFIG=(

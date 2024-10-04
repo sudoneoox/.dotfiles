@@ -97,6 +97,7 @@ handle_push() {
             0)
                 for config in "${CONFIGS[@]}"; do
                     push_config "$config"
+                    echo "$config"
                 done
                 break
                 ;;
