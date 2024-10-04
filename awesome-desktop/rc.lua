@@ -787,7 +787,7 @@ ruled.client.connect_signal("request::rules", function()
 
     ruled.client.append_rule {
 	rule_any = {
-           name = { "Firefox" }
+           name = { "Firefox", "Brave" }
 	},
   	 properties = { opacity = 1, maximized = false, floating = false },
     }
@@ -897,8 +897,10 @@ end)
 --awful.spawn.with_shell("~/.config/awesome/autorun.sh")
 awful.spawn.with_shell("dex --environment Awesome --autostart")
 awful.util.spawn_with_shell("flameshot")
-awful.util.spawn_with_shell("picom --conf ~/.config/picom/conf")
+-- awful.util.spawn_with_shell("picom --conf ~/.config/picom/conf")
 awful.util.spawn_with_shell("nitrogen --restore &")
+-- awful.util.spawn_with_shell("killall xgifwallpaper")
+-- awful.util.spawn_with_shell("xgifwallpaper ~/.dotfiles/shared/wallpapers/gifs/mario.gif &")
 awful.util.spawn_with_shell("clipmenud &")
 awful.util.spawn_with_shell("blueman-applet &")
 awful.util.spawn_with_shell("nm-applet &")

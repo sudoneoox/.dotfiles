@@ -10,17 +10,34 @@ NC='\033[0m' # No Color
 WD=$(pwd)
 
 # Define the config directories to sync
-CONFIGS=("fish" "kitty" "awesome" "rofi" "picom" "nix")
+CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nix")
 
-# Function to display the menu
-display_menu() {
+# Function to display the main menu
+display_main_menu() {
+    echo -e "${YELLOW}Select an action:${NC}"
+    echo "1) Sync and push configs"
+    echo "2) Revert to backup"
+    echo "3) Exit"
+}
+
+# Function to display the sync menu
+display_sync_menu() {
     echo -e "${YELLOW}Select which configs to sync and push:${NC}"
     echo "0) All"
     for i in "${!CONFIGS[@]}"; do
         echo "$((i+1))) ${CONFIGS[$i]}"
     done
     echo "$((${#CONFIGS[@]}+1))) Custom selection"
-    echo "$((${#CONFIGS[@]}+2))) Exit"
+    echo "$((${#CONFIGS[@]}+2))) Back to main menu"
+}
+
+# Function to display the revert menu
+display_revert_menu() {
+    echo -e "${YELLOW}Select which config to revert:${NC}"
+    for i in "${!CONFIGS[@]}"; do
+        echo "$((i+1))) ${CONFIGS[$i]}"
+    done
+    echo "$((${#CONFIGS[@]}+1))) Back to main menu"
 }
 
 # Function to get user selection
@@ -48,6 +65,26 @@ sync_config() {
     echo -e "${GREEN}$config synced and backed up.${NC}"
 }
 
+# Function to revert a specific config to its backup
+revert_config() {
+    local config=$1
+    echo -e "${YELLOW}Reverting $config to backup...${NC}"
+    
+    if [ ! -d "$WD/$config/.backup" ]; then
+        echo -e "${RED}No backup found for $config.${NC}"
+        return
+    fi
+    
+    # Remove everything except .backup
+    find "$WD/$config" -mindepth 1 -maxdepth 1 ! -name .backup -exec rm -rf {} +
+    
+    # Move contents of .backup to the config directory
+    mv "$WD/$config/.backup/"* "$WD/$config/"
+    rmdir "$WD/$config/.backup"
+    
+    echo -e "${GREEN}$config reverted to backup.${NC}"
+}
+
 # Function to push changes to GitHub
 push_to_github() {
     echo -e "${YELLOW}Pushing changes to GitHub...${NC}"
@@ -57,10 +94,10 @@ push_to_github() {
     echo -e "${GREEN}Changes pushed to GitHub.${NC}"
 }
 
-# Main script logic
-main() {
+# Function to handle sync and push
+handle_sync_and_push() {
     while true; do
-        display_menu
+        display_sync_menu
         selection=$(get_selection)
         
         case $selection in
@@ -85,8 +122,7 @@ main() {
                 break
                 ;;
             $((${#CONFIGS[@]}+2)))
-                echo "Exiting..."
-                exit 0
+                return
                 ;;
             *)
                 if [ "$selection" -ge 1 ] && [ "$selection" -le "${#CONFIGS[@]}" ]; then
@@ -96,6 +132,47 @@ main() {
                 else
                     echo -e "${RED}Invalid selection. Please try again.${NC}"
                 fi
+                ;;
+        esac
+    done
+}
+
+# Function to handle revert
+handle_revert() {
+    while true; do
+        display_revert_menu
+        selection=$(get_selection)
+        
+        if [ "$selection" -eq $((${#CONFIGS[@]}+1)) ]; then
+            return
+        elif [ "$selection" -ge 1 ] && [ "$selection" -le "${#CONFIGS[@]}" ]; then
+            revert_config "${CONFIGS[$((selection-1))]}"
+            break
+        else
+            echo -e "${RED}Invalid selection. Please try again.${NC}"
+        fi
+    done
+}
+
+# Main script logic
+main() {
+    while true; do
+        display_main_menu
+        selection=$(get_selection)
+        
+        case $selection in
+            1)
+                handle_sync_and_push
+                ;;
+            2)
+                handle_revert
+                ;;
+            3)
+                echo "Exiting..."
+                exit 0
+                ;;
+            *)
+                echo -e "${RED}Invalid selection. Please try again.${NC}"
                 ;;
         esac
     done

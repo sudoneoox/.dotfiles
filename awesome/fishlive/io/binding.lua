@@ -89,14 +89,16 @@ end
 
 local bit32 = require("bit32")
 
-local modifier_hash_data = { length = 0 }
+local modifier_hash_data = {
+    length = 0
+}
 
 function binding.get_modifiers_hash(modifiers)
     local hash = 0
     for _, v in ipairs(modifiers) do
         local modifier_hash = modifier_hash_data[v]
         if not modifier_hash then
-            modifier_hash = bit32.lshift(1,modifier_hash_data.length)
+            modifier_hash = bit32.lshift(1, modifier_hash_data.length)
             modifier_hash_data[v] = modifier_hash
             modifier_hash_data.length = modifier_hash_data.length + 1
         end
@@ -104,6 +106,7 @@ function binding.get_modifiers_hash(modifiers)
     end
     return hash
 end
+
 
 local Binding = {}
 

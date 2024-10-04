@@ -652,14 +652,18 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
       nil,
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
+        -- spotifyWibox,
+        -- pomoWibox,
         separator,
-        netWibox,
+        alsaWibox,
         archupdateWibox,
-        brightWibox,
-        fsWibox,
         memWibox,
         cpuWibox,
-        alsaWibox,
+        -- brightWibox,
+        netWibox,
+        fsWibox,
+        -- tempWibox,
+        -- netWibox,
         clockWibox,
         s.mylayoutsmenu,
       },
@@ -676,7 +680,7 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
         -- netWibox,
-        battery_widget({display_notification=true, show_current_level=true, margin_right=0}),
+        -- battery_widget({display_notification=true, show_current_level=true, margin_right=0}),
         systray,
 
 
@@ -843,15 +847,15 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
   theme.change_wallpaper_colorscheme = fishlive.wallpaper.createUserWallpaper(wp_colorscheme_params)
 
   -- Register Tag Wallpaper Changer
-  fishlive.wallpaper.registerTagWallpaper({
-    screen = capi.screen,
-    wp_selected = wp_selected,
-    wp_random = wp_random,
-    wppath = wppath,
-    wp_user_params = wp_user_params,
-    wp_colorscheme_params = wp_colorscheme_params,
-    change_wallpaper_colorscheme = theme.change_wallpaper_colorscheme
-  })
+  -- fishlive.wallpaper.registerTagWallpaper({
+  --   screen = capi.screen,
+  --   wp_selected = wp_selected,
+  --   wp_random = wp_random,
+  --   wppath = wppath,
+  --   wp_user_params = wp_user_params,
+  --   wp_colorscheme_params = wp_colorscheme_params,
+  --   change_wallpaper_colorscheme = theme.change_wallpaper_colorscheme
+  -- })
 
   ---------------------------
   -- Collage Images Feature
