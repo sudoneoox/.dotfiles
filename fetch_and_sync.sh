@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 WD=$(pwd)
 
 # Define the config directories to sync
-CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nix")
+CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nix" "nvim")
 
 # Function to display the main menu
 display_main_menu() {

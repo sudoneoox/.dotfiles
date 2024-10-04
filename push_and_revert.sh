@@ -11,7 +11,7 @@ WD=$(pwd)
 CONFIG_DIR="$HOME/.config"
 
 # Define the config directories to manage
-CONFIGS=("awesome" "rofi" "picom" "kitty" "fish")
+CONFIGS=("awesome" "rofi" "picom" "kitty" "fish" "nvim")
 
 # Function to display the main menu
 display_main_menu() {

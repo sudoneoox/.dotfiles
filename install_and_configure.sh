@@ -7,7 +7,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Define package lists
-CORE_PACKAGES=(
+DEPENDENCY_PACKAGES=(
   "xorg" "xorg-xinit" "xterm" "git" "polkit" "polkit-gnome" "alsa-utils"
   "pulseaudio" "pulseaudio-alsa" "pavucontrol" "pipewire" "pipewire-pulse"
   "arandr" "at" "acpi" "git" "brightnessctl"
@@ -24,21 +24,25 @@ FONT_PACKAGES=(
   "ttf-iosevka-nerd" "ttf-mononoki-nerd" "ttf-roboto" "ttf-fira-mono"
 )
 
-EXTRA_PACKAGES=(
+CORE_PACKAGES=(
   "webkit2gtk-4.1" "networkmanager-openconnect" "localsend-bin" "cups"
-  "btop" "bat" "filelight" "syncthing"
+  "btop" "bat" "filelight" "syncthing" "neovim"
+)
+
+NVIM_CONFIG=(
+ "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm"
+
 )
 
 # Function to display the main menu
 display_main_menu() {
   echo -e "${YELLOW}Select an action:${NC}"
   echo "1) Install dependency packages"
-  echo "2) Install AUR packages"
-  echo "3) Install fonts"
-  echo "4) Install Arc icons"
-  echo "5) Install core packages"
-  echo "6) Install all"
-  echo "7) Exit"
+  echo "2) Install fonts"
+  echo "3) Install Arc icons"
+  echo "4) Install core packages"
+  echo "5) Install all"
+  echo "6) Exit"
 }
 
 # Function to get user selection
@@ -49,9 +53,12 @@ get_selection() {
 }
 
 # Function to install core packages
-install_core_packages() {
+install_dependency_packages() {
   echo -e "${GREEN}Installing core packages...${NC}"
-  sudo pacman -S --needed "${CORE_PACKAGES[@]}"
+  sudo pacman -S --needed "${DEPENDENCY_PACKAGES[@]}"
+  yay -S --needed "${NVIM_CONFIG[@]}"
+  sudo npm i -g eslint
+  yay -S --needed "${DEPENDENCY_PACKAGES[@]}"
 }
 
 # Function to install AUR packages
@@ -76,10 +83,10 @@ install_arc_icons() {
 }
 
 # Function to install extra packages
-install_extra_packages() {
+install_core_packages() {
   echo -e "${GREEN}Installing extra packages...${NC}"
-  sudo pacman -S --needed "${EXTRA_PACKAGES[@]}"
-  yay -S --needed "${EXTRA_PACKAGES[@]}"
+  sudo pacman -S --needed "${CORE_PACKAGES[@]}"
+  yay -S --needed "${CORE_PACKAGES[@]}"
 }
 
 # Main script logic
@@ -90,28 +97,27 @@ main() {
 
     case $selection in
     1)
-      install_core_packages
+      install_dependency_packages
+      install_aur_packages
       ;;
     2)
-      install_aur_packages
-      ;;
-    3)
       install_fonts
       ;;
-    4)
+    3)
       install_arc_icons
       ;;
-    5)
-      install_extra_packages
+    4)
+      install_core_packages
+      install_aur_packages
       ;;
-    6)
+    5)
       install_core_packages
       install_aur_packages
       install_fonts
       install_arc_icons
-      install_extra_packages
+      install_core_packages
       ;;
-    7)
+    6)
       echo "Exiting..."
       exit 0
       ;;
