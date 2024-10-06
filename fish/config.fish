@@ -11,7 +11,7 @@ alias syncdrive='grive -s ~/Desktop/GoodNotes'
 alias vncstart='x11vnc -display :0 -rfbauth ~/.vnc/passwd'
 alias diffs='diff --side-by-side --suppress-common-lines'
 alias clip='kitten clipboard'
-alias syncall="rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' / "
+alias syncall="rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/$USER/disks/*' / "
 
 
 
