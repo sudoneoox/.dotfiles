@@ -17,7 +17,7 @@ AUR_PACKAGES=(
   "picom-git" "network-manager-applet" "volctl" "rofi" "lxappearance" "qt5ct"
   "kvantum" "pop-theme" "mugshot" "papirus-icon-theme" "awesome-git" "playerctl"
   "flameshot" "clipmenu-rofi" "blueman" "rofi" "clipmenu-rofi" "maim" "i3lock-color"
-  "nitrogen" "playerctl"
+  "nitrogen" "playerctl" "localsend-bin"
 )
 
 FONT_PACKAGES=(
@@ -25,12 +25,12 @@ FONT_PACKAGES=(
 )
 
 CORE_PACKAGES=(
-  "webkit2gtk-4.1" "networkmanager-openconnect" "localsend-bin" "cups"
+  "webkit2gtk-4.1" "networkmanager-openconnect" "cups"
   "btop" "bat" "filelight" "syncthing" "neovim" "tldr"
 )
 
 NVIM_CONFIG=(
- "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm"
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm"
 
 )
 
