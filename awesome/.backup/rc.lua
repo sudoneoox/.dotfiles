@@ -28,7 +28,7 @@ local naughty = require("naughty")
 local ruled = require("ruled")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
-
+require("collision")()
 -- special layouts import
 local treetile = require("treetile")
 -- local treetileBindings = require("treetile.bindings")
@@ -325,18 +325,18 @@ awful.keyboard.append_global_keybindings({
     awful.key({ modkey }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
               {description = "show filesystem", group = "widgets"}),
     -- ALSA volume control
-    awful.key({ }, "XF86AudioRaiseVolume", function ()
+    awful.key({ ctrlkey}, "Up", function ()
             os.execute(string.format("amixer -q set %s 5%%+", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description="sounds volume up", group="awesome"}),
         
-    awful.key({ }, "XF86AudioLowerVolume", function ()
+    awful.key({ctrlkey }, "Down", function ()
             os.execute(string.format("amixer -q set %s 5%%-", beautiful.volume.channel))
             beautiful.volume.update()
         end,
         {description="sounds volume down", group="awesome"}),
-    awful.key({ }, "XF86AudioMute",
+    awful.key({ ctrlkey }, "m",
         function ()
             os.execute(string.format("amixer -q set %s toggle", beautiful.volume.channel))
             beautiful.volume.update()
@@ -379,10 +379,7 @@ awful.keyboard.append_global_keybindings({
 
 -- Tags related keybindings
 awful.keyboard.append_global_keybindings({
-    awful.key({ modkey }, "Left", awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey }, "Right",awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+
     awful.key({ modkey }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
 })
@@ -790,7 +787,7 @@ ruled.client.connect_signal("request::rules", function()
 
     ruled.client.append_rule {
 	rule_any = {
-           name = { "Firefox" }
+           name = { "Firefox", "Brave" }
 	},
   	 properties = { opacity = 1, maximized = false, floating = false },
     }
@@ -901,9 +898,12 @@ end)
 awful.spawn.with_shell("dex --environment Awesome --autostart")
 awful.util.spawn_with_shell("flameshot")
 -- awful.util.spawn_with_shell("picom --conf ~/.config/picom/conf")
+awful.util.spawn_with_shell("nitrogen --restore &")
+-- awful.util.spawn_with_shell("killall xgifwallpaper")
+-- awful.util.spawn_with_shell("xgifwallpaper ~/.dotfiles/shared/wallpapers/gifs/mario.gif &")
 awful.util.spawn_with_shell("clipmenud &")
 awful.util.spawn_with_shell("blueman-applet &")
 awful.util.spawn_with_shell("nm-applet &")
--- awful.util.spawn_with_shell("dbus-update-activation-environment DISPLAY")
-awful.util.spawn_with_shell("startcaffeine.sh &")
-
+awful.util.spawn_with_shell("dbus-update-activation-environment DISPLAY")
+awful.util.spawn_with_shell("caffeine &")
+--}}}

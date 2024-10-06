@@ -53,8 +53,8 @@ local desktop = {
     },
     -- Default parameters
     iconsize   = { width = 128,  height = 128 },
-    labelsize  = { width = 100, height = 20 },
-    margin     = { x = 0, y = 0 },
+    labelsize  = { width = 140, height = 20 },
+    margin     = { x = 20, y = 20 },
 }
 
 -- MIME types list

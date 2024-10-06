@@ -7,36 +7,20 @@
 
 local helpers  = require("lain.helpers")
 local wibox    = require("wibox")
-local tonumber = tonumber
+local helpers  = require("fishlive.helpers")
 
--- {thermal,core} temperature info
--- lain.widget.temp
+-- {thermal} temperature info
+-- lain.widget.temp_ryzen
 
 local function factory(args)
-    args           = args or {}
-
-    local temp     = { widget = args.widget or wibox.widget.textbox() }
+    local temp     = { widget = wibox.widget.textbox() }
+    local args     = args or {}
     local timeout  = args.timeout or 30
-    local tempfile = args.tempfile or "/sys/devices/virtual/thermal/thermal_zone0/temp"
-    local format   = args.format or "%.1f"
     local settings = args.settings or function() end
 
     function temp.update()
-        helpers.async({"find", "/sys/devices", "-type", "f", "-name", "*temp*"}, function(f)
-            temp_now = {}
-            local temp_fl, temp_value
-            for t in f:gmatch("[^\n]+") do
-                temp_fl = helpers.first_line(t)
-                if temp_fl then
-                    temp_value = tonumber(temp_fl)
-                    temp_now[t] = temp_value and temp_value/1e3 or temp_fl
-                end
-            end
-            if temp_now[tempfile] then
-                coretemp_now = string.format(format, temp_now[tempfile])
-            else
-                coretemp_now = "N/A"
-            end
+        helpers.async({"/home/box/bin/cputemp"}, function(f)
+            coretemp_now = helpers.all_trim(f) or "N/A"
             widget = temp.widget
             settings()
         end)

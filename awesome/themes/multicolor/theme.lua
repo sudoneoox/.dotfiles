@@ -310,18 +310,6 @@ local tempgpu = lain.widget.temp_gpu({
 })
 local tempWibox = wiboxBox2(tempicon, tempcpu.widget, tempgpu.widget, wboxColor, theme.widgetbar_fg, 4, 4, underLineSize, wiboxMargin)
 
--- Weather widget
--- wboxColor = theme.baseColors[6]
--- local tempicon = wibox.widget.textbox();
--- tempicon:set_markup(markup.fontfg(theme.font_larger, wboxColor, ""))
--- local myWeather = weather_widget({
---   api_key = os.getenv("WEATHER_API_KEY"), --fill your API KEY
---   coordinates = config.weather_coordinates, -- fill your coords
---   font_name = 'Carter One',
---   show_hourly_forecast = true,
---   show_daily_forecast = true,
--- })
--- local weatherWibox = wiboxBox0(myWeather, wboxColor, theme.widgetbar_fg, 3, 3, underLineSize, wiboxMargin)
 
 -- ALSA volume
 local alsaColor = theme.baseColors[7]
@@ -384,18 +372,6 @@ local cw = calendar_widget({
   theme = 'outrun',
   placement = 'top_right'
 })
-
--- Pomodoro 
-wboxColor = theme.baseColors[5]
--- local pomoWibox = wiboxBox1(nil, pomodoro_widget, wboxColor, theme.widgetbar_fg, 0, 0, underLineSize, wiboxMargin)
-
--- Spotify widget
--- local spotifyWibox = spotify_widget({
---   font = theme.font,
---   max_length = 500,
---   play_icon = '/usr/share/icons/Papirus-Light/24x24/categories/spotify.svg',
---   pause_icon = '/usr/share/icons/Papirus-Dark/24x24/panel/spotify-indicator.svg'
--- })
 
 -- Systray
 local systray = wibox.widget.systray()
@@ -652,18 +628,14 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
       nil,
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
-        -- spotifyWibox,
-        -- pomoWibox,
         separator,
-        alsaWibox,
+        netWibox,
         archupdateWibox,
+        brightWibox,
+        fsWibox,
         memWibox,
         cpuWibox,
-        -- brightWibox,
-        netWibox,
-        fsWibox,
-        -- tempWibox,
-        -- netWibox,
+        alsaWibox,
         clockWibox,
         s.mylayoutsmenu,
       },
@@ -680,7 +652,7 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
       { -- Right widgets
         layout = wibox.layout.fixed.horizontal,
         -- netWibox,
-        -- battery_widget({display_notification=true, show_current_level=true, margin_right=0}),
+        battery_widget({display_notification=true, show_current_level=true, margin_right=0}),
         systray,
 
 
@@ -847,15 +819,15 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
   theme.change_wallpaper_colorscheme = fishlive.wallpaper.createUserWallpaper(wp_colorscheme_params)
 
   -- Register Tag Wallpaper Changer
-  -- fishlive.wallpaper.registerTagWallpaper({
-  --   screen = capi.screen,
-  --   wp_selected = wp_selected,
-  --   wp_random = wp_random,
-  --   wppath = wppath,
-  --   wp_user_params = wp_user_params,
-  --   wp_colorscheme_params = wp_colorscheme_params,
-  --   change_wallpaper_colorscheme = theme.change_wallpaper_colorscheme
-  -- })
+  fishlive.wallpaper.registerTagWallpaper({
+    screen = capi.screen,
+    wp_selected = wp_selected,
+    wp_random = wp_random,
+    wppath = wppath,
+    wp_user_params = wp_user_params,
+    wp_colorscheme_params = wp_colorscheme_params,
+    change_wallpaper_colorscheme = theme.change_wallpaper_colorscheme
+  })
 
   ---------------------------
   -- Collage Images Feature
