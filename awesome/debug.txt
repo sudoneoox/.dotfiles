@@ -1,0 +1,2 @@
+systray.tostring=3
+systray.tostring=3

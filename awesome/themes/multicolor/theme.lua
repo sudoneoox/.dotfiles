@@ -240,13 +240,6 @@ capi.awesome.connect_signal("signal::archupdates", function(count)
 end)
 local archupdateWibox = wiboxBox1(archupdateText, arch_updates, wboxColor, theme.widgetbar_fg, 3, 6, underLineSize, wiboxMargin)
 
--- Keyboard map indicator and switcher
--- local wboxColor = theme.baseColors[1]
--- local keyboardText = wibox.widget.textbox();
--- keyboardText:set_markup(markup.fontfg(theme.font_larger, wboxColor, " "))
--- theme.mykeyboardlayout = awful.widget.keyboardlayout()
--- local keyboardWibox = wiboxBox1(keyboardText, theme.mykeyboardlayout, wboxColor, theme.widgetbar_fg, 3, 6, underLineSize, wiboxMargin)
-
 -- FS ROOT
 wboxColor = theme.baseColors[2]
 local fsicon = wibox.widget.textbox();
@@ -300,37 +293,43 @@ local tempcpu = lain.widget.temp_ryzen({
     })
   end
 })
-local tempgpu = lain.widget.temp_gpu({
-  settings = function()
-    widget:set_markup(markup.fontfg(theme.font, theme.widgetbar_fg, " gpu " .. tostring(coretemp_now) .. "˚C"))
-    broker.emit_signal("broker::gputemp", {
-      value = coretemp_now
-    })
-  end
-})
-local tempWibox = wiboxBox2(tempicon, tempcpu.widget, tempgpu.widget, wboxColor, theme.widgetbar_fg, 4, 4, underLineSize, wiboxMargin)
+-- local tempgpu = lain.widget.temp_gpu({
+--   settings = function()
+--     widget:set_markup(markup.fontfg(theme.font, theme.widgetbar_fg, " gpu " .. tostring(coretemp_now) .. "˚C"))
+--     broker.emit_signal("broker::gputemp", {
+--       value = coretemp_now
+--     })
+--   end
+-- })
+-- local tempWibox = wiboxBox2(tempicon, tempcpu.widget, tempgpu.widget, wboxColor, theme.widgetbar_fg, 4, 4, underLineSize, wiboxMargin)
+local tempWibox = wiboxBox2(tempicon, tempcpu.widget, NULL, wboxColor, theme.widgetbar_fg, 4, 4, underLineSize, wiboxMargin)
 
 
--- ALSA volume
+-- ALSA volume with Material Design Icons
 local alsaColor = theme.baseColors[7]
-local volicon = wibox.widget.textbox();
+local volicon = wibox.widget.textbox()
 theme.volume = lain.widget.alsa({
-  settings = function()
-    if volume_now.status == "off" then
-      volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, ""))
-    elseif tonumber(volume_now.level) == 0 then
-      volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, ""))
-    elseif tonumber(volume_now.level) <= 25 then
-      volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, ""))
-    elseif tonumber(volume_now.level) <= 70 then
-      volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, "墳"))
-    else
-      volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, ""))
+    settings = function()
+        local icon
+        if volume_now.status == "off" then
+            icon = ""  -- Material icon for muted
+        elseif tonumber(volume_now.level) == 0 then
+            icon = ""  -- Material icon for muted
+        elseif tonumber(volume_now.level) <= 25 then
+            icon = ""  -- Material icon for low volume
+        elseif tonumber(volume_now.level) <= 70 then
+            icon = ""  -- Material icon for medium volume
+        else
+            icon = ""  -- Material icon for high volume
+        end
+        volicon:set_markup(markup.fontfg(theme.font_larger, alsaColor, icon))
+        widget:set_markup(markup.fontfg(theme.font, theme.widgetbar_fg, " " .. volume_now.level .. "% "))
     end
-    widget:set_markup(markup.fontfg(theme.font, theme.widgetbar_fg, " " .. volume_now.level .. "% "))
-  end
 })
+
+-- Wibox container for volume
 local alsaWibox = wiboxBox1(volicon, theme.volume.widget, alsaColor, theme.widgetbar_fg, 3, 3, underLineSize, wiboxMargin)
+
 
 -- Net
 wboxColor = theme.baseColors[8]
@@ -635,6 +634,7 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
         fsWibox,
         memWibox,
         cpuWibox,
+        tempWibox,
         alsaWibox,
         clockWibox,
         s.mylayoutsmenu,

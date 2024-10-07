@@ -1,26 +1,24 @@
 --[[
+* Licensed under GNU General Public License v2
+* (c) 2013, Luca CPZ
+* Modified for NVIDIA GPU on Arch Linux
+]]
 
-     Licensed under GNU General Public License v2
-      * (c) 2013, Luca CPZ
-
---]]
-
-local helpers  = require("lain.helpers")
-local wibox    = require("wibox")
-local helpers  = require("fishlive.helpers")
+local helpers = require("lain.helpers")
+local wibox = require("wibox")
+local awful = require("awful")
 
 -- {gputemp} temperature info
 -- lain.widget.temp_gpu
-
 local function factory(args)
-    local temp     = { widget = wibox.widget.textbox() }
-    local args     = args or {}
-    local timeout  = args.timeout or 30
+    local temp = { widget = wibox.widget.textbox() }
+    local args = args or {}
+    local timeout = args.timeout or 30
     local settings = args.settings or function() end
 
     function temp.update()
-        helpers.async({"/home/diego/bin/gputemp"}, function(f)
-            coretemp_now = helpers.all_trim(f) or "N/A"
+        awful.spawn.easy_async("nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader,nounits", function(stdout)
+            gputemp_now = stdout:match("%d+") or "N/A"
             widget = temp.widget
             settings()
         end)

@@ -1,26 +1,25 @@
 --[[
+* Licensed under GNU General Public License v2
+* (c) 2013, Luca CPZ
+* Modified for Intel CPU on Arch Linux
+]]
 
-     Licensed under GNU General Public License v2
-      * (c) 2013, Luca CPZ
-
---]]
-
-local helpers  = require("lain.helpers")
-local wibox    = require("wibox")
-local helpers  = require("fishlive.helpers")
+local helpers = require("lain.helpers")
+local wibox = require("wibox")
+local awful = require("awful")
 
 -- {thermal} temperature info
--- lain.widget.temp_ryzen
-
+-- lain.widget.temp_intel
 local function factory(args)
-    local temp     = { widget = wibox.widget.textbox() }
-    local args     = args or {}
-    local timeout  = args.timeout or 30
+    local temp = { widget = wibox.widget.textbox() }
+    local args = args or {}
+    local timeout = args.timeout or 30
     local settings = args.settings or function() end
 
     function temp.update()
-        helpers.async({"/home/box/bin/cputemp"}, function(f)
-            coretemp_now = helpers.all_trim(f) or "N/A"
+        awful.spawn.easy_async("sensors", function(stdout)
+            local temp_line = stdout:match("Package id 0:.-(%+%d+%.%d°C)")
+            coretemp_now = temp_line and temp_line:match("%d+") or "N/A"
             widget = temp.widget
             settings()
         end)
