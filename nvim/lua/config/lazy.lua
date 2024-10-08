@@ -13,8 +13,8 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require('lazy').setup({
-    "nvim-lua/plenary.nvim",
     spec = {
+        {"LazyVim/LazyVim", import = "lazyvim.plugins"},
         {import = "plugins"},
     },
     defaults = {
