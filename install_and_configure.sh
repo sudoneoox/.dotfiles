@@ -30,7 +30,7 @@ CORE_PACKAGES=(
 )
 
 NVIM_CONFIG=(
-  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm"
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server"
 
 )
 

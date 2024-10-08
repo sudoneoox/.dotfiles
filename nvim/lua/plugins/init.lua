@@ -14,6 +14,26 @@ for _, plugin in ipairs(colorschemes) do
   table.insert(plugins, plugin)
 end
 
+for _, plugin in ipairs(coding) do
+  table.insert(plugins, plugin)
+end
+
+for _, plugin in ipairs(formattings) do
+  table.insert(plugins, plugin)
+end
+
+for _, plugin in ipairs(treesitter_plugins) do
+  table.insert(plugins, plugin)
+end
+
+for _, plugin in ipairs(linter_plugins) do
+  table.insert(plugins, plugin)
+end
+
+for _, plugin in ipairs(editor) do
+  table.insert(plugins, plugin)
+end
+
 for _, plugin in ipairs(lsp_plugins) do
   table.insert(plugins, plugin)
 end
