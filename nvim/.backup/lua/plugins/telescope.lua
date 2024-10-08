@@ -1,13 +1,22 @@
 return {
-  "nvim-telescope/telescope.nvim",
-  tag = "0.1.8",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  config = function()
-    local builtin = require("telescope.builtin")
+    'nvim-telescope/telescope.nvim',
+    event = 'VimEnter',
+    dependencies = {
+        'nvim-lua/plenary.nvim'
+    },
+    config = function ()
+        local status_ok, telescope = pcall(require, 'telescope')
 
-    -- Keybindings for searching different directories
-    vim.keymap.set("n", "<leader>fh", function()
-      builtin.find_files({ cwd = vim.fn.expand("~") })
-    end, { desc = "Find files in the home directory" })
-  end,
+        if not status_ok then
+            return
+        end
+
+        telescope.setup()
+        local builtin = require('telescope.builtin')
+
+        vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+        vim.keymap.set('n', '<leader>r', builtin.oldfiles, {})
+        vim.keymap.set('n', '<leader>gr', builtin.live_grep, {})
+        vim.keymap.set('n', '<leader>fj', builtin.help_tags, {})
+    end
 }
