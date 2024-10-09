@@ -30,7 +30,7 @@ CORE_PACKAGES=(
 )
 
 NVIM_CONFIG=(
-  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server"
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" 
 
 )
 
@@ -59,6 +59,8 @@ install_dependency_packages() {
   yay -S --needed "${NVIM_CONFIG[@]}"
   sudo npm i -g eslint
   yay -S --needed "${DEPENDENCY_PACKAGES[@]}"
+  sudo npm install -g neovim
+
 }
 
 # Function to install AUR packages
