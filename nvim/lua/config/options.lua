@@ -3,6 +3,8 @@ local opt = vim.opt
 -- line numbers
 opt.relativenumber = true
 opt.number = true
+opt.ruler = true
+
 
 -- tabs & indentation
 opt.tabstop = 2
@@ -13,7 +15,7 @@ opt.autoindent = true
 -- line indenting
 opt.wrap = false
 
--- cureson line
+-- cursor line
 opt.cursorline = true
 
 -- search settings
@@ -31,3 +33,11 @@ opt.iskeyword:append("-")
 
 -- clipboard
 opt.clipboard = "unnamedplus"
+
+-- command line
+opt.wildmenu = true
+opt.showcmd = true
+
+
+-- colors
+opt.termguicolors = true

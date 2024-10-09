@@ -13,27 +13,27 @@ vim.opt.rtp:prepend(lazypath)
 
 
 require('lazy').setup({
-    spec = {
-        {"LazyVim/LazyVim", import = "lazyvim.plugins"},
-        {import = "plugins"},
+  spec = {
+    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { import = "plugins" },
+  },
+  defaults = {
+    lazy = true,
+    version = false,
+    install = { colorscheme = { "catppuccin" } },
+    checker = {
+      enabled = true,
     },
-    defaults = {
-        lazy = true,
-        version = false,
-        install = { colorscheme = {"catppuccin"}},
-        checker = {
-            enabled = true,
-        },
-    },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-            }
-        }
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      }
     }
+  }
 })
