@@ -15,7 +15,7 @@ alias syncall="rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/s
 alias nvidia-run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
 alias pkgsort="pacman -Qi | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
 alias nv='nvim'
-
+alias :q='exit'
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'micromamba shell init' !!
 set -gx MAMBA_EXE "/home/diego/.local/bin/micromamba"
