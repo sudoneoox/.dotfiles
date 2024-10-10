@@ -1,4 +1,5 @@
 local dir = 'plugins.ui.'
-return {
 
+return {
+  require(dir .. 'cmp-cmdline')
 }
