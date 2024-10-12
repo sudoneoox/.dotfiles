@@ -173,34 +173,53 @@ local notifpath_user        = notifpath .. sel_portrait .. "/"
 if not fhelpers.is_dir(notifpath_user) then notifpath_user = notifpath .. "default/" end
 local notif_user = {}
 -- Set wallpaper for each tag
+local wp_random = {
+    "wall_1.png",
+    "wall_2.png",
+    "wall_3.png",
+    "wall_4.png",
+    "wall_5.png",
+    "wall_6.png",
+    "wall_7.png",
+    "wall_8.png",
+    "wall_9.png",
+    "wall_10.png",
+    "wall_11.png",
+    "wall_12.png",
+    "wall_13.png",
+    "wall_14.png",
+    "wall_15.png",
+    "wall_16.png",
+    "wall_17.png",
+    "wall_18.png",
+    "wall_19.png",
+    "wall_20.png"
+}
+
 local wp_selected = {
     "random",
-    "wallhaven.png",
-    "forest.png",
-    "krystof3.png",
-    "midnight.png",
-    "dark.png",
-    "krystof1.png",
-    "pinkmountains.png",
-    "dune.png",
-    "green.png",
-    "rock.png",
-    "krystof2.png",
+    "wall_1.png",
+    "wall_2.png",
+    "wall_3.png",
+    "wall_4.png",
+    "wall_5.png",
+    "wall_6.png",
+    "wall_7.png",
+    "wall_8.png",
+    "wall_9.png",
+    "wall_10.png",
+    "wall_11.png",
+    "wall_12.png",
+    "wall_13.png",
+    "wall_14.png",
+    "wall_15.png",
+    "wall_16.png",
+    "wall_17.png",
+    "wall_18.png",
+    "wall_19.png",
+    "wall_20.png"
 }
--- Feature: place random wallpaper if the wp_selected has "random" text
-local wp_random = {
-    "wallhaven.png",
-    "forest.png",
-    "krystof3.png",
-    "midnight.png",
-    "dark.png",
-    "krystof1.png",
-    "pinkmountains.png",
-    "dune.png",
-    "green.png",
-    "rock.png",
-    "krystof2.png",
-}
+
 -- }}}
 
 -- {{{ Wibar
@@ -358,8 +377,9 @@ local clockWibox = wiboxBox1(clockicon, mytextclock, wboxColor, theme.widgetbar_
 -- power widget
 wboxColor = theme.baseColors[3]
 local powIcon = wibox.widget.textbox();
-local powWibox = wiboxBox1(nil, battery_widget({ display_notification = true, show_current_level = true, margin_right = 1 })
-, wboxColor, theme.widgetbar_fg, 0, 0, underLineSize, wiboxMargin)
+local powWibox = wiboxBox1(nil,
+    battery_widget({ display_notification = true, show_current_level = true, margin_right = 1 })
+    , wboxColor, theme.widgetbar_fg, 0, 0, underLineSize, wiboxMargin)
 
 -- brightness widget
 wboxColor = theme.baseColors[2]
@@ -449,15 +469,15 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
         },
         names = { "/main", "/w3", "/apps", "/dev", "/water", "/air", "/fire", "/earth", "/love" },
         layouts = {
-            awful.layout.layouts[13], --main
-            awful.layout.layouts[2], --www (machi)
-            awful.layout.layouts[2], --apps (machi)
+            awful.layout.layouts[13],   --main
+            awful.layout.layouts[2],    --www (machi)
+            awful.layout.layouts[2],    --apps (machi)
             awful.layout.suit.floating, --idea
-            awful.layout.layouts[11], --water (machi to empty placement)
-            awful.layout.layouts[8], --air
-            awful.layout.layouts[5], --fire (center-work)
-            awful.layout.layouts[6], --earth (termfair)
-            awful.layout.layouts[9] --love
+            awful.layout.layouts[11],   --water (machi to empty placement)
+            awful.layout.layouts[8],    --air
+            awful.layout.layouts[5],    --fire (center-work)
+            awful.layout.layouts[6],    --earth (termfair)
+            awful.layout.layouts[9]     --love
         }
     }
     local unpack = table.unpack or unpack
@@ -652,7 +672,7 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
                 separator,
             },
             s.mytasklist, -- Middle widget
-            {       -- Right widgets
+            {             -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
                 -- netWibox,
                 battery_widget({ display_notification = true, show_current_level = true, margin_right = 0 }),
@@ -887,4 +907,3 @@ end)
 
 return theme
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
-
