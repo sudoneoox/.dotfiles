@@ -9,13 +9,13 @@ NC='\033[0m' # No Color
 # Define package lists
 DEPENDENCY_PACKAGES=(
   "xorg" "xorg-xinit" "xterm" "git" "polkit" "polkit-gnome" "alsa-utils"
-  "pulseaudio" "pulseaudio-alsa" "pavucontrol" "pipewire" "pipewire-pulse"
+  "pavucontrol" "pipewire" "pipewire-pulse" "pipewire-alsa"
   "arandr" "at" "acpi" "git" "brightnessctl" "rsync"
 )
 
 AUR_PACKAGES=(
   "picom-git" "network-manager-applet" "volctl" "rofi" "lxappearance" "qt5ct"
-  "kvantum" "pop-theme" "mugshot" "papirus-icon-theme" "awesome-git" "playerctl"
+  "kvantum" "pop-theme" "mugshot" "papirus-icon-theme" "awesome-luajit-git" "playerctl"
   "flameshot" "clipmenu-rofi" "blueman" "rofi" "clipmenu-rofi" "maim" "i3lock-color"
   "nitrogen" "playerctl" "localsend-bin"
 )
@@ -26,12 +26,12 @@ FONT_PACKAGES=(
 
 CORE_PACKAGES=(
   "webkit2gtk-4.1" "networkmanager-openconnect" "cups"
-  "btop" "bat" "filelight" "syncthing" "neovim" "tldr"
+  "btop" "bat" "filelight" "syncthing" "neovim" "tldr" "firefox" "discord"
 )
 
 NVIM_CONFIG=(
-  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb"
-
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd"
+ 
 )
 
 # Function to display the main menu
