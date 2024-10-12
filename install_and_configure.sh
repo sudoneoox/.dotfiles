@@ -26,7 +26,7 @@ FONT_PACKAGES=(
 
 CORE_PACKAGES=(
   "webkit2gtk-4.1" "networkmanager-openconnect" "cups"
-  "btop" "bat" "filelight" "syncthing" "neovim" "tldr" "firefox" "discord"
+  "btop" "bat" "filelight" "syncthing" "neovim" "tldr" "firefox" "discord" "fzf"
 )
 
 NVIM_CONFIG=(
