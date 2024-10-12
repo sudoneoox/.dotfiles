@@ -89,6 +89,8 @@ install_core_packages() {
   echo -e "${GREEN}Installing extra packages...${NC}"
   sudo pacman -S --needed "${CORE_PACKAGES[@]}"
   yay -S --needed "${CORE_PACKAGES[@]}"
+  sudo pacman -S --needed wget
+  wget micro.mamba.pm/install.sh && chmod +x install.sh && ./install.sh && rm install.sh
 }
 
 # Main script logic
