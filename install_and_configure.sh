@@ -30,7 +30,7 @@ CORE_PACKAGES=(
 )
 
 NVIM_CONFIG=(
-  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd"
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd" "ripgrep"
  
 )
 
@@ -56,11 +56,9 @@ get_selection() {
 install_dependency_packages() {
   echo -e "${GREEN}Installing core packages...${NC}"
   sudo pacman -S --needed "${DEPENDENCY_PACKAGES[@]}"
-  yay -S --needed "${NVIM_CONFIG[@]}"
-  sudo npm i -g eslint
   yay -S --needed "${DEPENDENCY_PACKAGES[@]}"
-  sudo npm install -g neovim
-
+  yay -S --needed "${NVIM_CONFIG[@]}"
+  sudo npm i -g eslint vim-language-server tree-sitter-cli neovim
 }
 
 # Function to install AUR packages
