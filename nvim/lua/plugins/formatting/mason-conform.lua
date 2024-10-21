@@ -1,17 +1,24 @@
 return {
   {
     "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        cpp = { "clang-format" },
-        c = { "clang-format" },
-        sql = { "sqlfmt" },
-        ts = { "prettier" },
-        js = { "prettier" },
-        jsx = { "prettier" },
-        py = { "autopep8" },
-      },
-    },
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local conform = require("conform")
+      conform.setup({
+        formatters_by_ft = {
+          cpp = { "clang-format" },
+          c = { "clang-format" },
+          sql = { "sqlfmt" },
+          css = { "prettier" },
+          html = { "prettier" },
+          typescript = { "prettier" },
+          typescriptreact = { "prettier" },
+          javascript = { "prettier" },
+          javascriptreact = { "prettier" },
+          python = { "isort", "black" },
+        },
+      })
+    end,
   },
   {
     "zapling/mason-conform.nvim",
