@@ -368,6 +368,9 @@ awful.keyboard.append_global_keybindings({
 	awful.key({ modkey }, "l", function()
 		awful.spawn("rofi -show-icons -modi windowcd,window,drun -show window")
 	end, { description = "show client list", group = "awesome" }),
+	awful.key({ modkey }, ",", function()
+		awful.spawn("rofimoji")
+	end, { description = "show emojis", group = "awesome" }),
 	awful.key({ modkey, ctrlkey }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
