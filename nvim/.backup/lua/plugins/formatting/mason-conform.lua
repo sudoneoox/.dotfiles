@@ -8,7 +8,6 @@ return {
         formatters_by_ft = {
           cpp = { "clang-format" },
           c = { "clang-format" },
-          sql = { "sqlfmt" },
           css = { "prettier" },
           html = { "prettier" },
           typescript = { "prettier" },
