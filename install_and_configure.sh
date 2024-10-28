@@ -17,11 +17,11 @@ AUR_PACKAGES=(
   "picom-git" "network-manager-applet" "volctl" "rofi" "lxappearance" "qt5ct"
   "kvantum" "pop-theme" "mugshot" "papirus-icon-theme" "awesome-luajit-git" "playerctl"
   "flameshot" "clipmenu-rofi" "blueman" "rofi" "clipmenu-rofi" "maim" "i3lock-color"
-  "nitrogen" "playerctl" "localsend-bin"
+  "nitrogen" "playerctl" "localsend-bin" "rofimoji"
 )
 
 FONT_PACKAGES=(
-  "ttf-iosevka-nerd" "ttf-mononoki-nerd" "ttf-roboto" "ttf-fira-mono"
+  "ttf-iosevka-nerd" "ttf-mononoki-nerd" "ttf-roboto" "ttf-fira-mono" "noto-fonts-emoji"
 )
 
 CORE_PACKAGES=(
