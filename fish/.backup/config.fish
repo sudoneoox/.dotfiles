@@ -16,11 +16,14 @@ alias nvidia-run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
 alias pkgsort="pacman -Qi | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
 alias nv='nvim'
 alias :q='exit'
+alias docker-fix='export DOCKER_HOST="unix:///var/run/docker.sock"'
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'micromamba shell init' !!
 set -gx MAMBA_EXE "/home/diego/.local/bin/micromamba"
-set -gx MAMBA_ROOT_PREFIX /home/diego/micromamba
+set -gx MAMBA_ROOT_PREFIX "/home/diego/micromamba"
 $MAMBA_EXE shell hook --shell fish --root-prefix $MAMBA_ROOT_PREFIX | source
 # <<< mamba initialize <<<
 alias mamba='micromamba'
 alias screenfix='xrandr --output HDMI-0 --auto --output DP-5 --auto --left-of HDMI-0'
+
+fish_add_path /home/diego/.spicetify
