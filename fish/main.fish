@@ -23,14 +23,6 @@ function fish_user_key_bindings --description "Key bindings. Go to functions def
       bind \e 'exit 0'
     end
 
-#  * Convinient directory navigation using `Alt+Ctrl` + `→` `←` `↑`
-#    - History back/forward/go to parent dir
-#    - You can use Fish as file manager!
-#    - Comes handy when you start typing command, then realize wrong dir
-    bind \e\[1\;7D "prevd; echo; commandline -f repaint;"
-    bind \e\[1\;7C "nextd; echo; commandline -f repaint;"
-    bind \e\[1\;7A "cd ..; echo; commandline -f repaint;"
-    bind \e\[1\;7B "prevd; echo; commandline -f repaint;"
 
     math (echo $version | tr -d .)"<231" > /dev/null; and echo "⚠ Please upgrade Fish shell to at least 2.3.0 https://fishshell.com/#platform_tabs"
 
@@ -49,12 +41,7 @@ function fish_title --description "Prints directory and currently running comman
   echo 🖿 (basename (pwd))
 end
 
-function fish_greeting --description "Prints `/var/run/motd.dynamic` as greeting. Use in combination with [headlines.sh](https://github.com/dmi3/bin/blob/master/headlines.sh) to see top news"
-  if test -e /var/run/motd.dynamic -a "$SINGLE_COMMAND" != "true"
-    set_color 4E9A06
-    cat /var/run/motd.dynamic
-  end
-end
+
 
 function show_exit_code --description "Show exit code on command failure" --on-event fish_postexec
     set -l last_status $status
