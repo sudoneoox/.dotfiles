@@ -71,7 +71,7 @@ end)
 -- This is used later as the default terminal and editor to run.
 terminal = config.user.terminal --"kitty" --"urxvt"
 terminal2 = config.user.terminal2nd
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal2 .. " -e " .. editor
 
 -- Default modkey.
@@ -103,18 +103,6 @@ tag.connect_signal("request::default_layouts", function()
 		machi.layout.create({ new_placement_cb = machi.layout.placement.empty_then_fair }),
 		awful.layout.suit.tile.bottom,
 		fishlive.layout.mirrored_tile.left,
-		-- lain.layout.cascade,
-		-- lain.layout.cascade.tile,
-		-- lain.layout.termfair,
-		-- awful.layout.suit.tile.left,
-		-- awful.layout.suit.tile.top,
-		-- awful.layout.suit.fair,
-		-- awful.layout.suit.fair.horizontal,
-		-- awful.layout.suit.spiral.dwindle,
-		-- awful.layout.suit.corner.nw,
-		-- awful.layout.suit.corner.ne,
-		-- awful.layout.suit.corner.sw,
-		-- awful.layout.suit.corner.se,
 	})
 end)
 
@@ -189,20 +177,7 @@ awful.keyboard.append_global_keybindings({
 		awesome.emit_signal("dashboard::toggle")
 	end, { description = "dashboard toggle", group = "awesome" }),
 
-	-- user directory wallpapers change by keybindings - NEXT/PREVIOUS WALLPAPER
-	awful.key({ modkey, altkey }, "w", function()
-		beautiful.change_wallpaper_user(1)
-	end, { description = "set next user wallpaper", group = "awesome" }),
-	awful.key({ modkey, ctrlkey }, "w", function()
-		beautiful.change_wallpaper_user(-1)
-	end, { description = "set previous user wallpaper", group = "awesome" }),
-
-	-- colorscheme directory wallpapers change by keybindings - NEXT/PREVIOUS WALLPAPER
-	awful.key({ modkey, altkey }, "c", function()
-		beautiful.change_wallpaper_colorscheme(1)
-	end, { description = "set next colorscheme wallpaper", group = "awesome" }),
-
-	awful.key({ modkey, ctrlkey }, "c", function()
+	awful.key({ ctrlkey }, "q", function()
 		local c = client.focus
 		if c then
 			local pid = c.pid
@@ -295,10 +270,7 @@ awful.keyboard.append_global_keybindings({
 		awful.client.focus.bydirection("down")
 	end, { description = "layout.client.focus down", group = "layout" }),
 
-	awful.key({ "Shift" }, "Alt_L", function()
-		beautiful.mykeyboardlayout.next_layout()
-	end),
-
+	
 	-- Lock Support
 	awful.key({ modkey }, "Home", function()
 		awful.util.spawn_with_shell("lock.sh")
@@ -318,11 +290,13 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "decrease gaps between windows", group = "awesome" }),
 
 	-- Widgets popups
-	awful.key({ modkey }, "h", function()
+  awful.key({ modkey }, "h", function()
 		if beautiful.fs then
 			beautiful.fs.show(7)
 		end
 	end, { description = "show filesystem", group = "widgets" }),
+
+
 	-- ALSA volume control
 	awful.key({ ctrlkey }, "Up", function()
 		os.execute(string.format("amixer -q set %s 5%%+", beautiful.volume.channel))
@@ -349,31 +323,48 @@ awful.keyboard.append_global_keybindings({
 
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
+  -- help menu
 	awful.key({ modkey, ctrlkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
+  -- main menu
 	awful.key({ modkey }, "w", function()
 		main_menu:toggle(nil, { source = "mouse" })
 	end, { description = "show main menu", group = "awesome" }),
+
+  -- power off screen 
 	awful.key({ modkey }, "q", function()
 		fishlive.widget.exit_screen()
 	end, { description = "exit screen", group = "awesome" }),
+
+  -- change colorschemes
 	awful.key({ modkey }, "c", function()
 		beautiful.menu_colorschemes_create():toggle()
 	end, { description = "show colorschemes menu", group = "awesome" }),
+
 	awful.key({ modkey }, "x", function()
 		beautiful.menu_portrait_create():toggle()
 	end, { description = "show portrait menu for love tag", group = "awesome" }),
+
+  -- clipboard history
 	awful.key({ modkey }, "v", function()
 		awful.util.spawn_with_shell("clipmenu")
 	end, { description = "clipboard history by rofi/clipmenud", group = "awesome" }),
+
+  -- window switcher with rofi
 	awful.key({ modkey }, "l", function()
 		awful.spawn("rofi -show-icons -modi windowcd,window,drun -show window")
 	end, { description = "show client list", group = "awesome" }),
+
+  -- rofi emoji selector
 	awful.key({ modkey }, ",", function()
 		awful.spawn("rofimoji")
 	end, { description = "show emojis", group = "awesome" }),
-	awful.key({ modkey, ctrlkey }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
-	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
+  -- reload awesome
+	awful.key({ modkey, ctrlkey }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
+
+	-- awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
+
+  -- terminal open 
 	awful.key({ modkey }, "space", function()
 		awful.util.spawn_with_shell("kitty")
 	end, { description = "open a terminal", group = "launcher" }),
@@ -414,34 +405,6 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "restore minimized", group = "client" }),
 })
 
--- Tabbed related keybindings
-awful.keyboard.append_global_keybindings({
-	awful.key({
-		modifiers = { modkey, ctrlkey },
-		keygroup = "numpad",
-		description = "tabbed features",
-		group = "client",
-		on_press = function(index)
-			if index == 1 then
-				bling.module.tabbed.pick_with_dmenu()
-			elseif index == 2 then
-				bling.module.tabbed.pick_by_direction("down")
-			elseif index == 4 then
-				bling.module.tabbed.pick_by_direction("left")
-			elseif index == 5 then
-				bling.module.tabbed.iter()
-			elseif index == 6 then
-				bling.module.tabbed.pick_by_direction("right")
-			elseif index == 7 then
-				bling.module.tabbed.pick()
-			elseif index == 8 then
-				bling.module.tabbed.pick_by_direction("up")
-			elseif index == 9 then
-				bling.module.tabbed.pop()
-			end
-		end,
-	}),
-})
 
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
@@ -853,40 +816,6 @@ end)
 -- {{{ Titlebars
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
 client.connect_signal("request::titlebars", function(c)
-	--buttons for the titlebar
-	-- local buttons = {
-	--     awful.button({ }, 1, function()
-	--         c:activate { context = "titlebar", action = "mouse_move"  }
-	--     end),
-	--     awful.button({ }, 3, function()
-	--         c:activate { context = "titlebar", action = "mouse_resize"}
-	--     end),
-	-- }
-
-	-- awful.titlebar(c).widget = {
-	--     { -- Left
-	--         awful.titlebar.widget.iconwidget(c),
-	--         buttons = buttons,
-	--         layout  = wibox.layout.fixed.horizontal
-	--     },
-	--     { -- Middle
-	--         { -- Title
-	--             align  = "center",
-	--             widget = awful.titlebar.widget.titlewidget(c)
-	--         },
-	--         buttons = buttons,
-	--         layout  = wibox.layout.flex.horizontal
-	--     },
-	--     { -- Right
-	--         awful.titlebar.widget.floatingbutton (c),
-	--         awful.titlebar.widget.maximizedbutton(c),
-	--         awful.titlebar.widget.stickybutton   (c),
-	--         awful.titlebar.widget.ontopbutton    (c),
-	--         awful.titlebar.widget.closebutton    (c),
-	--         layout = wibox.layout.fixed.horizontal()
-	--     },
-	--     layout = wibox.layout.align.horizontal
-	-- }
 	awful.titlebar.hide(c)
 end)
 -- }}}
@@ -899,7 +828,7 @@ ruled.notification.connect_signal("request::rules", function()
 		rule = {},
 		properties = {
 			screen = awful.screen.preferred,
-			--implicit_timeout = 5,
+			implicit_timeout =3,
 		},
 	})
 end)
