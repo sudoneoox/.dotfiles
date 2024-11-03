@@ -11,6 +11,8 @@ alias sync='rslsync && kitty sh -c "firefox http://localhost:8888"'
 alias vncstart='x11vnc -display :0 -rfbauth ~/.vnc/passwd'
 alias diffs='diff --side-by-side --suppress-common-lines'
 alias clip='kitten clipboard'
+alias docker-fix="export DOCKER_HOST='unix:///var/run/docker.sock'"
+alias firefox='firefox-developer-edition'
 
 # create backups to external hd
 alias syncall="rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/$USER/disks/*' / "
