@@ -51,19 +51,30 @@ get_selection() {
 sync_config() {
     local config=$1
     echo -e "${GREEN}Syncing $config...${NC}"
-    
-    # Remove old backup if exists
-    rm -rf "$WD/$config/.backup"
-    
-    # Create new backup
-    mkdir -p "$WD/$config/.backup"
-    cp -R "$HOME/.config/$config/"* "$WD/$config/.backup/" 2>/dev/null
-    
-    # Sync files
-    rsync -av --delete "$HOME/.config/$config/" "$WD/$config/" --exclude .backup
+    if [ "$config" = "awesome-desktop" ]; then
+        # Remove old backup if exists
+        rm -rf "$WD/$config/.backup"
+        
+        # Create new backup
+        mkdir -p "$WD/$config/.backup"
+        cp -R "$HOME/.config/awesome/"* "$WD/$config/.backup/" 2>/dev/null
+        
+        # Sync files
+        rsync -av --delete "$HOME/.config/awesome/" "$WD/$config/" --exclude .backup
+    else
+        # Remove old backup if exists
+        rm -rf "$WD/$config/.backup"
+        
+        # Create new backup
+        mkdir -p "$WD/$config/.backup"
+        cp -R "$HOME/.config/$config/"* "$WD/$config/.backup/" 2>/dev/null
+        
+        # Sync files
+        rsync -av --delete "$HOME/.config/$config/" "$WD/$config/" --exclude .backup
+    fi
     
     echo -e "${GREEN}$config synced and backed up.${NC}"
-}
+   }
 
 # Function to revert a specific config to its backup
 revert_config() {
