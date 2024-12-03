@@ -16,13 +16,14 @@ alias firefox='firefox-developer-edition'
 
 # create backups to external hd
 alias syncall="rsync -aAXHv --exclude='/dev/*' --exclude='/proc/*' --exclude='/sys/*' --exclude='/tmp/*' --exclude='/run/*' --exclude='/mnt/*' --exclude='/media/*' --exclude='/lost+found/' --exclude='/home/$USER/disks/*' / "
-
+alias compress='tar -cJf folder.tar.xz'
+alias decompress='tar -xJf'
 
 # * run application using nvidia gpu
 alias nvidia-run='__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia'
 alias pkgsort="pacman -Qi | egrep '^(Name|Installed)' | cut -f2 -d':' | paste - - | column -t | sort -nrk 2 | grep MiB | less"
 alias nv='nvim'
-
+alias zen='zen-browser'
 # * nvim like exit
 alias :q='exit'
 
