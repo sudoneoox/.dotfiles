@@ -11,7 +11,7 @@ WD=$(pwd)
 CONFIG_DIR="$HOME/.config"
 
 # Define the config directories to manage
-CONFIGS=("awesome" "rofi" "picom" "kitty" "fish" "nvim")
+CONFIGS=("awesome" "rofi" "picom" "kitty" "fish" "nvim" "anki")
 
 # Function to display the main menu
 display_main_menu() {
@@ -48,23 +48,40 @@ get_selection() {
 }
 
 # Function to push a specific config
+
 push_config() {
     local config=$1
     echo -e "${GREEN}Pushing $config...${NC}"
     
     # Create backup
-    if [ -d "$CONFIG_DIR/$config" ]; then
-        backup_dir="$CONFIG_DIR/$config.backup.$(date +%Y%m%d%H%M%S)"
-        cp -R "$CONFIG_DIR/$config" "$backup_dir"
-        echo -e "${GREEN}Backup created: $backup_dir${NC}"
-    fi
-    
-    # Push configuration
-    if [ -d "$WD/$config" ]; then
-        rsync -av --delete "$WD/$config/" "$CONFIG_DIR/$config/"
-        echo -e "${GREEN}$config pushed successfully.${NC}"
+    if [ "$config" = "anki" ]; then
+        if [ -d "$HOME/.local/share/Anki2" ]; then
+            backup_dir="$HOME/.local/share/Anki2.backup.$(date +%Y%m%d%H%M%S)"
+            cp -R "$HOME/.local/share/Anki2" "$backup_dir"
+            echo -e "${GREEN}Backup created: $backup_dir${NC}"
+        fi
+        
+        # Push configuration
+        if [ -d "$WD/$config" ]; then
+            rsync -av --delete "$WD/$config/" "$HOME/.local/share/Anki2/"
+            echo -e "${GREEN}$config pushed successfully.${NC}"
+        else
+            echo -e "${RED}$config directory not found in working directory.${NC}"
+        fi
     else
-        echo -e "${RED}$config directory not found in working directory.${NC}"
+        if [ -d "$CONFIG_DIR/$config" ]; then
+            backup_dir="$CONFIG_DIR/$config.backup.$(date +%Y%m%d%H%M%S)"
+            cp -R "$CONFIG_DIR/$config" "$backup_dir"
+            echo -e "${GREEN}Backup created: $backup_dir${NC}"
+        fi
+        
+        # Push configuration
+        if [ -d "$WD/$config" ]; then
+            rsync -av --delete "$WD/$config/" "$CONFIG_DIR/$config/"
+            echo -e "${GREEN}$config pushed successfully.${NC}"
+        else
+            echo -e "${RED}$config directory not found in working directory.${NC}"
+        fi
     fi
 }
 
@@ -73,18 +90,33 @@ revert_config() {
     local config=$1
     echo -e "${YELLOW}Reverting $config...${NC}"
     
-    # Find the most recent backup
-    local backup_dir=$(ls -td "$CONFIG_DIR/$config.backup."* | head -n1)
-    
-    if [ -z "$backup_dir" ]; then
-        echo -e "${RED}No backup found for $config.${NC}"
-        return
+    if [ "$config" = "anki" ]; then
+        # Find the most recent backup
+        local backup_dir=$(ls -td "$HOME/.local/share/Anki2.backup."* | head -n1)
+        
+        if [ -z "$backup_dir" ]; then
+            echo -e "${RED}No backup found for $config.${NC}"
+            return
+        fi
+        
+        # Revert to backup
+        rm -rf "$HOME/.local/share/Anki2"
+        cp -R "$backup_dir" "$HOME/.local/share/Anki2"
+        echo -e "${GREEN}$config reverted to backup: $backup_dir${NC}"
+    else
+        # Find the most recent backup
+        local backup_dir=$(ls -td "$CONFIG_DIR/$config.backup."* | head -n1)
+        
+        if [ -z "$backup_dir" ]; then
+            echo -e "${RED}No backup found for $config.${NC}"
+            return
+        fi
+        
+        # Revert to backup
+        rm -rf "$CONFIG_DIR/$config"
+        cp -R "$backup_dir" "$CONFIG_DIR/$config"
+        echo -e "${GREEN}$config reverted to backup: $backup_dir${NC}"
     fi
-    
-    # Revert to backup
-    rm -rf "$CONFIG_DIR/$config"
-    cp -R "$backup_dir" "$CONFIG_DIR/$config"
-    echo -e "${GREEN}$config reverted to backup: $backup_dir${NC}"
 }
 
 # Function to handle pushing configs

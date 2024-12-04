@@ -10,7 +10,7 @@ NC='\033[0m' # No Color
 WD=$(pwd)
 
 # Define the config directories to sync
-CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nix" "nvim")
+CONFIGS=("fish" "kitty" "awesome" "awesome-desktop" "rofi" "picom" "nix" "nvim" "anki")
 
 # Function to display the main menu
 display_main_menu() {
@@ -61,6 +61,16 @@ sync_config() {
         
         # Sync files
         rsync -av --delete "$HOME/.config/awesome/" "$WD/$config/" --exclude .backup
+    elif [ "$config" = "anki" ]; then
+        # Remove old backup if exists
+        rm -rf "$WD/$config/.backup"
+        
+        # Create new backup
+        mkdir -p "$WD/$config/.backup"
+        cp -R "$HOME/.local/share/Anki2/"* "$WD/$config/.backup/" 2>/dev/null
+        
+        # Sync files
+        rsync -av --delete "$HOME/.local/share/Anki2/" "$WD/$config/" --exclude .backup
     else
         # Remove old backup if exists
         rm -rf "$WD/$config/.backup"
@@ -74,7 +84,8 @@ sync_config() {
     fi
     
     echo -e "${GREEN}$config synced and backed up.${NC}"
-   }
+}
+
 
 # Function to revert a specific config to its backup
 revert_config() {
