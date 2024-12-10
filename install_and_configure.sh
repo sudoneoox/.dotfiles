@@ -10,14 +10,14 @@ NC='\033[0m' # No Color
 DEPENDENCY_PACKAGES=(
   "xorg" "xorg-xinit" "xterm" "git" "polkit" "polkit-gnome" "alsa-utils"
   "pavucontrol" "pipewire" "pipewire-pulse" "pipewire-alsa"
-  "arandr" "at" "acpi" "git" "brightnessctl" "rsync"
+  "arandr" "at" "acpi" "git" "brightnessctl"
 )
 
 AUR_PACKAGES=(
-  "picom-git" "network-manager-applet" "volctl" "rofi" "lxappearance" "qt5ct"
-  "kvantum" "pop-theme" "mugshot" "papirus-icon-theme" "awesome-luajit-git" "playerctl"
+  "network-manager-applet" "volctl" "rofi" "lxappearance" "qt5ct"
+  "kvantum" "pop-theme" "papirus-icon-theme" "awesome-luajit-git" "playerctl"
   "flameshot" "clipmenu-rofi" "blueman" "rofi" "clipmenu-rofi" "maim" "i3lock-color"
-  "nitrogen" "playerctl" "localsend-bin" "rofimoji"
+  "nitrogen" "localsend-bin" "rofimoji"
 )
 
 FONT_PACKAGES=(
@@ -25,13 +25,11 @@ FONT_PACKAGES=(
 )
 
 CORE_PACKAGES=(
-  "webkit2gtk-4.1" "networkmanager-openconnect" "cups"
-  "btop" "bat" "filelight" "syncthing" "neovim" "tldr" "firefox" "discord" "fzf" "obsidian"
+  "cups" "spotify" btop" "bat" "filelight" "neovim" "tldr" "zen-browser-bin" "discord" "fzf" "obsidian"
 )
 
 NVIM_CONFIG=(
   "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd" "ripgrep"
- 
 )
 
 # Function to display the main menu
