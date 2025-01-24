@@ -15,7 +15,6 @@ return {
           javascript = { "prettier" },
           javascriptreact = { "prettier" },
           python = { "isort", "black" },
-          json = {"prettier", "fixjson"}
         },
       })
     end,
