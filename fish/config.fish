@@ -7,3 +7,5 @@ source $XDG_CONFIG_HOME/fish/main.fish
 source $XDG_CONFIG_HOME/fish/temp_dev_vars.fish
 #source $XDG_CONFIG_HOME/fish/prompt.fish
 
+
+fish_add_path /home/diego/.spicetify

@@ -6,6 +6,7 @@ end
 # Created by `pipx` on 2024-01-20 00:28:35
 set PATH $PATH /home/diego/.local/bin
 
+alias copilot="gh copilot explain"
 alias publicip='wget http://checkip.dyndns.org/ -O - -o /dev/null | cut -d: -f 2 | cut -d\< -f 1'
 alias sync='rslsync && kitty sh -c "firefox http://localhost:8888"'
 alias vncstart='x11vnc -display :0 -rfbauth ~/.vnc/passwd'
