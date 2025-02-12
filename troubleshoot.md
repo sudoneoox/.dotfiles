@@ -1,6 +1,6 @@
 ## Dual Boot Troubleshooting: Restoring Windows Boot Option
 
-### Issue
+### Common Issue
 After reinstalling Arch Linux on a system with Windows on a separate drive, the Windows boot option is no longer available in the boot menu. The Windows installation is still present on the other drive, but it's not recognized by the boot loader.
 
 ### Solution
