@@ -11,7 +11,7 @@ WD=$(pwd)
 CONFIG_DIR="$HOME/.config"
 
 # Define the config directories to manage
-CONFIGS=("awesome" "rofi" "picom" "kitty" "fish" "nvim" "anki")
+CONFIGS=("awesome" "rofi" "picom" "kitty" "fish" "nvim" "anki" "awesome-desktop")
 
 # Function to display the main menu
 display_main_menu() {
@@ -54,6 +54,26 @@ push_config() {
     echo -e "${GREEN}Pushing $config...${NC}"
     
     # Create backup
+    
+        # Special case for awesome-desktop
+    if [ "$config" = "awesome-desktop" ]; then
+        if [ -d "$CONFIG_DIR/awesome" ]; then
+            backup_dir="$CONFIG_DIR/awesome.backup.$(date +%Y%m%d%H%M%S)"
+            cp -R "$CONFIG_DIR/awesome" "$backup_dir"
+            echo -e "${GREEN}Backup created: $backup_dir${NC}"
+        fi
+        
+        # Push configuration from awesome-desktop to awesome
+        if [ -d "$WD/$config" ]; then
+            rsync -av --delete "$WD/$config/" "$CONFIG_DIR/awesome/"
+            echo -e "${GREEN}$config pushed to awesome successfully.${NC}"
+        else
+            echo -e "${RED}$config directory not found in working directory.${NC}"
+        fi
+        return
+    fi
+
+
     if [ "$config" = "anki" ]; then
         if [ -d "$HOME/.local/share/Anki2" ]; then
             backup_dir="$HOME/.local/share/Anki2.backup.$(date +%Y%m%d%H%M%S)"

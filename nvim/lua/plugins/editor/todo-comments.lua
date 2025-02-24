@@ -5,8 +5,8 @@ return {
   event = "LazyFile",
   opts = {
     keywords = {
-        IMPORTANT =  {color = "#ff00cc", alt = {"IMP"}},
-        TEST = {color="#ffb01f", alt = {"TT"}},
+        IMPORTANT =  {color = "#ff00cc", alt = {"CRITICAL"}},
+        TEST = {color="#ffb01f", alt = {"TD"}},
         DESCRIPTION = {color="#73ff00", alt = {"DESC"}},
       }
 

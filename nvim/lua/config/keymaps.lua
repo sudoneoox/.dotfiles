@@ -13,3 +13,7 @@ keymap.set('x', '<leader>p', "\"_dP", opts)
 -- delete duplicate neotree keymaps in default lazy
 vim.keymap.del('n', '<leader>e')
 vim.keymap.del('n', '<leader>E')
+
+-- remove pgUp and pgDwn buttons
+vim.keymap.set({'n', 'v', 'i'}, '<PageUp>', '<Nop>')
+vim.keymap.set({'n', 'v', 'i'}, '<PageDown>', '<Nop>')
