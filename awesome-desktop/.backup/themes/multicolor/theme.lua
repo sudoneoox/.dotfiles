@@ -172,6 +172,7 @@ local notifpath             = os.getenv("HOME") .. "/Pictures/wallpapers/public-
 local notifpath_user        = notifpath .. sel_portrait .. "/"
 if not fhelpers.is_dir(notifpath_user) then notifpath_user = notifpath .. "default/" end
 local notif_user = {}
+
 -- Set wallpaper for each tag
 local wp_selected = {
     "random",
@@ -187,6 +188,7 @@ local wp_selected = {
     "rock.png",
     "krystof2.png",
 }
+
 -- Feature: place random wallpaper if the wp_selected has "random" text
 local wp_random = {
     "wallhaven.png",
@@ -660,7 +662,7 @@ capi.screen.connect_signal("request::desktop_decoration", function(s)
                 -- spotifyWibox,
                 -- pomoWibox,
                 separator,
-                alsaWibox,
+                -- alsaWibox,
                 archupdateWibox,
                 memWibox,
                 cpuWibox,

@@ -43,10 +43,6 @@ local io = io
 local cairo = require("lgi").cairo
 
 
-
--- Widget Declarations
-local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
-
 -- Debug support
 if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
     require("lldebugger").start()
@@ -106,7 +102,7 @@ tag.connect_signal("request::default_layouts", function()
         fishlive.layout.mirrored_tile.left,
         -- lain.layout.cascade,
         -- lain.layout.cascade.tile,
-        -- lain.layout.termfair,
+        lain.layout.termfair,
         -- awful.layout.suit.tile.left,
         -- awful.layout.suit.tile.top,
         -- awful.layout.suit.fair,
@@ -185,20 +181,17 @@ awful.keyboard.append_global_keybindings({
         awful.screen.focused().bottomwibox.visible = not awful.screen.focused().bottomwibox.visible
     end,
     {description = "wi(b)ar toggle", group = "awesome"}),
-    awful.key({ modkey }, "z", function() awesome.emit_signal("dashboard::toggle") end,
-       {description = "dashboard toggle", group = "awesome"}),
 
     -- user directory wallpapers change by keybindings - NEXT/PREVIOUS WALLPAPER
     awful.key({ modkey, altkey }, "w", function() beautiful.change_wallpaper_user(1) end,
         {description = "set next user wallpaper", group = "awesome"}),
+
+
     awful.key({ modkey, ctrlkey }, "w", function() beautiful.change_wallpaper_user(-1) end,
         {description = "set previous user wallpaper", group = "awesome"}),
 
-    -- colorscheme directory wallpapers change by keybindings - NEXT/PREVIOUS WALLPAPER
-    awful.key({ modkey, altkey }, "c", function() beautiful.change_wallpaper_colorscheme(1) end,
-        {description = "set next colorscheme wallpaper", group = "awesome"}),
 
-        awful.key({ modkey, ctrlkey }, "c", function ()
+        awful.key({ modkey, ctrlkey }, "q", function ()
             local c = client.focus
             if c then
                 local pid = c.pid
@@ -208,10 +201,6 @@ awful.keyboard.append_global_keybindings({
             end
         end,
         {description = "kill window", group = "awesome"}),        
-
-    -- personal widget notification center
-    awful.key({ modkey }, "d", function() popup.visible=not popup.visible end,
-        {description = "show notification center", group = "awesome"}),
 
     -- machi layout special keybindings
     awful.key({ modkey }, ".", function () machi.default_editor.start_interactive() end,
@@ -303,17 +292,14 @@ awful.keyboard.append_global_keybindings({
         end,
         {description = "layout.client.focus down", group = "layout"}),
 
-    awful.key({ "Shift" }, "Alt_L", function () beautiful.mykeyboardlayout.next_layout(); end),
 
     -- Lock Support
-    awful.key({ modkey }, "Home", function () awful.util.spawn_with_shell("lock.sh") end,
-              {description="Lock Screen", group="awesome"}),
+    -- awful.key({ modkey }, "Home", function () awful.util.spawn_with_shell("lock.sh") end,
+    --           {description="Lock Screen", group="awesome"}),
+  
     -- Rofi Support
     awful.key({ modkey }, "r", function () awful.spawn("rofi -show-icons -modi windowcd,window,drun -show drun") end,
               {description="show rofi drun", group="launcher"}),
-
-    awful.key({ modkey }, "n", function () awful.spawn("iwmenu -m rofi") end,
-              {description="show network manager", group="launcher"}),
 
 
     -- Layout and Gaps Support
@@ -326,6 +312,7 @@ awful.keyboard.append_global_keybindings({
     -- Widgets popups
     awful.key({ modkey }, "h", function () if beautiful.fs then beautiful.fs.show(7) end end,
               {description = "show filesystem", group = "widgets"}),
+
     -- ALSA volume control
     awful.key({ ctrlkey}, "Up", function ()
             os.execute(string.format("amixer -q set %s 5%%+", beautiful.volume.channel))
@@ -345,13 +332,6 @@ awful.keyboard.append_global_keybindings({
         end,
         {description="sounds volume toggle mute", group="awesome"}),
 
-    -- Brightnessctl adjuster
-    awful.key({          }, "XF86MonBrightnessUp", function () 
-        brightness_widget:inc() end, 
-        {description = "increase brightness", group = "custom"}),
-    awful.key({         }, "XF86MonBrightnessDown", function () 
-        brightness_widget:dec() end, 
-        {description = "decrease brightness", group = "custom"}),
 })
 
 -- General Awesome keys

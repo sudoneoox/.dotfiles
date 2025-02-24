@@ -4,12 +4,12 @@ local apps = {
     screenshot = "flameshot",
     volume = "pavucontrol",
     appearance = "lxappearance",
-    browser = "firefox",
+    browser = "zen-browser",
     fileexplorer = "thunar",
-    discord = "discord",
-    editor = "nano",
-    ide = "code",
-    settings = "code /home/diego/.config/awesome/"
+    discord = "vesktop",
+    editor = "nvim",
+    ide = "nvim",
+    settings = "nvim /home/diego/.config/awesome/"
 }
 
 local terminal_cmds = {
