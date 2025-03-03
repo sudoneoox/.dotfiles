@@ -1,8 +1,8 @@
 local dir = "plugins.colorschemes."
 
 return {
-    -- require(dir .. 'tokyodark'),
-    -- require(dir .. 'catppuccin'),
+    require(dir .. "tokyodark"),
+    require(dir .. "catppuccin"),
     -- require(dir .. 'lackluster'),
     -- require(dir .. 'everforest'),
     -- require(dir .. 'rose-pine'),

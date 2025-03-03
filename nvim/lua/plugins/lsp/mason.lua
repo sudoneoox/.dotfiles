@@ -2,6 +2,7 @@ return {
     {
         "williamboman/mason.nvim",
         opts = {
+            automatic_installation = true,
             ensure_installed = {
                 -- Language servers
                 "gopls",
@@ -48,6 +49,9 @@ return {
                 "delve",
                 "java-debug-adapter",
             },
+        },
+        keys = {
+            { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
         },
     },
 }

@@ -14,9 +14,6 @@ keymap.set("x", "<leader>p", '"_dP', opts)
 keymap.del("n", "<leader>e")
 keymap.del("n", "<leader>E")
 
--- unwanted default keybinds in lazy nvim
-keymap.del("n", "<leader><Space>")
-
 -- remove pgUp and pgDwn buttons
 keymap.set({ "n", "v", "i" }, "<PageUp>", "<Nop>")
 keymap.set({ "n", "v", "i" }, "<PageDown>", "<Nop>")

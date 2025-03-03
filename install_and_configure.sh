@@ -10,7 +10,7 @@ TIME_SYNC=("ntp" "chrony")
 
 UTILS=("xorg" "xorg-xinit" "xterm" "git" "polkit" "polkit-gnome" "alsa-utils"
   "pavucontrol" "pipewire" "pipewire-pulse" "pipewire-alsa"
-  "arandr" "at" "acpi" "git" "brightnessctl" "rsync" "node" "network-manager-applet" "volctl" "playerctl" "awesome-luajit-git" "flameshot" 
+  "arandr" "at" "acpi" "git" "brightnessctl" "rsync" "node" "network-manager-applet" "volctl" "playerctl" "awesome-luajit-git" "flameshot"
   "clipmenu-rofi" "blueman" "maim" "i3lock-color" "nitrogen" "rofimoji" "cups" "btop" "bat" "fzf" "tldr" "wget")
 
 THEMES=("lxappearance" "qt5ct" "kvantum" "pop-theme" "papirus-icon-theme" "pop-theme")
@@ -18,11 +18,10 @@ THEMES=("lxappearance" "qt5ct" "kvantum" "pop-theme" "papirus-icon-theme" "pop-t
 FONT_PACKAGES=("ttf-iosevka-nerd" "ttf-mononoki-nerd" "ttf-roboto" "ttf-fira-mono" "noto-fonts-emoji")
 
 NVIM_CONFIG=(
-  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd" "ripgrep"
+  "python-cpplint" "clang" "python-sqlfluff" "nodejs" "npm" "lua-language-server" "lazygit" "ruby" "neovim-tree-sitter-git" "lldb" "lazygit" "fd" "ripgrep" "shell-color-scripts-git" "fd"
 )
 
 APPLICATIONS=("localsend-bin" "rofi" "spotify" "filelight" "neovim" "zen-browser-bin" "discord" "obsidian")
-
 
 DEPENDENCY_PACKAGES=(
   ${UTILS[*]} ${NVIM_CONFIG[*]} ${TIME_SYNC[*]}
@@ -62,10 +61,10 @@ install_packages() {
   yay -S --needed ${DEPENDENCY_PACKAGES[*]}
   yay -S --needed ${ETC_PACKAGES[*]}
   sudo npm i -g eslint vim-language-server tree-sitter-cli neovim
-  
+
   # Setup time synchronization
   setup_time_sync
-  
+
   echo -e "${GREEN}Installing Arc icons...${NC}"
   git clone https://github.com/horst3180/arc-icon-theme --depth 1 && cd arc-icon-theme
   ./autogen.sh --prefix=/usr
@@ -80,16 +79,16 @@ main() {
     display_main_menu
     selection=$(get_selection)
     case $selection in
-      y)
-        install_packages
-        ;;
-      n)
-        echo "Exiting..."
-        exit 0
-        ;;
-      *)
-        echo -e "${RED}Invalid selection.${NC}"
-        ;;
+    y)
+      install_packages
+      ;;
+    n)
+      echo "Exiting..."
+      exit 0
+      ;;
+    *)
+      echo -e "${RED}Invalid selection.${NC}"
+      ;;
     esac
   done
 }
