@@ -1,6 +1,5 @@
-local dir = 'plugins.util.'
+local dir = "plugins.util."
 
 return {
-  require(dir .. 'harpoon'),
-
+    require(dir .. "harpoon"),
 }

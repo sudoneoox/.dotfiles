@@ -1,5 +1,5 @@
-local dir = 'plugins.coding.'
+local dir = "plugins.coding."
 return {
-  require(dir .. 'disabled-plugins'),
-  require(dir .. 'dap'),
+    require(dir .. "disabled-plugins"),
+    -- require(dir .. 'dap'),
 }

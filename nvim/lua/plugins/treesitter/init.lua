@@ -1,4 +1,4 @@
-local dir = 'plugins.treesitter.'
+local dir = "plugins.treesitter."
 return {
-  require(dir .. 'disabled-plugins'),
+    require(dir .. "disabled-plugins"),
 }

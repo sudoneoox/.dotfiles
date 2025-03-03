@@ -1,5 +1,5 @@
-local dir = 'plugins.ui.'
+local dir = "plugins.ui."
 
 return {
-  require(dir .. 'cmp-cmdline')
+    require(dir .. "cmp-cmdline"),
 }
