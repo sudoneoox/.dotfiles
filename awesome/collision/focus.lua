@@ -202,8 +202,7 @@ local function bydirection(dir, c, swap,max)
         -- We found a client to swap
         local other = cltbl[((not cltbl[target] and #cltbl == 1) and 1 or target)]
         if capi.screen[other.screen] == capi.screen[c.screen] or col_utils.settings.swap_across_screen then
-          --BUG swap doesn't work if the screen is not the same
-          c:swap(other)
+            c:swap(other)
         else
           local t  = capi.screen[other.screen].selected_tag --TODO get index
           c.screen = capi.screen[ other.screen]

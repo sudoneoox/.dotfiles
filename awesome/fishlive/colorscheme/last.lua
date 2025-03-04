@@ -1,1 +1,1 @@
-return require "fishlive.colorscheme".monokai_pro
+return require "fishlive.colorscheme".eighties_one_dark

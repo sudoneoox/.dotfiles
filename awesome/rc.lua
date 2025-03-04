@@ -120,7 +120,8 @@ lain.layout.cascade.tile.ncol = 2
 -- {{{ Theme and Colorscheme Declaration
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-local themeName = "multicolor"
+-- local themeName = "multicolor"
+local themeName = 'multicolor'
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. themeName .. "/theme.lua")
 -- }}}
 
@@ -777,7 +778,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule_any = {
-			name = { "Firefox", "Brave" },
+			name = { "Firefox", "Brave", 'Zen Browser', 'zen-alpha', 'Zen-Browser' },
 		},
 		properties = { opacity = 1, maximized = false, floating = false },
 	})
