@@ -67,7 +67,7 @@ return {
             opts.indent = { enabled = true }
             opts.image = {
                 enabled = true,
-                formats = { "png", "jpeg", "jpg" },
+                formats = { "png", "jpeg", "jpg", "gif" },
             }
             opts.input = { enabled = true }
             opts.picker = { enabled = true }

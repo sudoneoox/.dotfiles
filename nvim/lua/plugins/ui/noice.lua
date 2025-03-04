@@ -41,6 +41,16 @@ return {
           { "<leader>nh", function() require("noice").cmd("history") end, desc = "Noice History" },
           { "<leader>nl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
           { "<leader>nD", function() require("notify").dismiss() end, desc = "Dismiss All Notifications" },
+
+          { "<leader>sn", false},
+          { "<leader>snt", false},
+          { "<leader>snp", false},
+          { "<leader>snd", false},
+          { "<leader>sna", false},
+          { "<leader>snh", false},
+          { "<leader>snl", false},
+          { "<leader>snD", false},
+
         },
     },
 }

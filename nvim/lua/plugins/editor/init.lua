@@ -5,4 +5,5 @@ return {
     require(dir .. "mini"),
     require(dir .. "ts-comments"),
     require(dir .. "disabled-plugins"),
+    require(dir .. "leetcode"),
 }
