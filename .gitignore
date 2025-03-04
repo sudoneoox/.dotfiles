@@ -1,4 +1,11 @@
 nixos/flake.lock
 */.backup
 **/*/.backup
+awesome-desktop/.backup
+awesome/.backup
+rofi/.backup
+nvim/.backup
+nixos/.backup
+kitty/.backup
+fish/.backup
 .backup
