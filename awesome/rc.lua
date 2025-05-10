@@ -47,11 +47,6 @@ local cairo = require("lgi").cairo
 -- Widget Declarations
 local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
--- Debug support
-if os.getenv("LOCAL_LUA_DEBUGGER_VSCODE") == "1" then
-	require("lldebugger").start()
-end
-
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -120,8 +115,7 @@ lain.layout.cascade.tile.ncol = 2
 -- {{{ Theme and Colorscheme Declaration
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
--- local themeName = "multicolor"
-local themeName = 'multicolor'
+local themeName = "multicolor"
 beautiful.init(gears.filesystem.get_configuration_dir() .. "themes/" .. themeName .. "/theme.lua")
 -- }}}
 
@@ -135,12 +129,6 @@ local main_menu = require("fishlive.widget.mebox.menu.main")
 
 -- Nice titlebars
 fishlive.plugins.createTitlebarsNiceLib()
-
--- Dashboard Component
-local dashboard
-if config.dashboard_enabled then
-	dashboard = require("fishlive.widget.dashboard")()
-end
 
 -- Notification Center
 local popup = require("notifs.notif-center.notif_popup")
@@ -271,7 +259,6 @@ awful.keyboard.append_global_keybindings({
 		awful.client.focus.bydirection("down")
 	end, { description = "layout.client.focus down", group = "layout" }),
 
-	
 	-- Lock Support
 	awful.key({ modkey }, "Home", function()
 		awful.util.spawn_with_shell("lock.sh")
@@ -291,12 +278,11 @@ awful.keyboard.append_global_keybindings({
 	end, { description = "decrease gaps between windows", group = "awesome" }),
 
 	-- Widgets popups
-  awful.key({ modkey }, "h", function()
+	awful.key({ modkey }, "h", function()
 		if beautiful.fs then
 			beautiful.fs.show(7)
 		end
 	end, { description = "show filesystem", group = "widgets" }),
-
 
 	-- ALSA volume control
 	awful.key({ ctrlkey }, "Up", function()
@@ -324,19 +310,19 @@ awful.keyboard.append_global_keybindings({
 
 -- General Awesome keys
 awful.keyboard.append_global_keybindings({
-  -- help menu
+	-- help menu
 	awful.key({ modkey, ctrlkey }, "s", hotkeys_popup.show_help, { description = "show help", group = "awesome" }),
-  -- main menu
+	-- main menu
 	awful.key({ modkey }, "w", function()
 		main_menu:toggle(nil, { source = "mouse" })
 	end, { description = "show main menu", group = "awesome" }),
 
-  -- power off screen 
+	-- power off screen
 	awful.key({ modkey }, "q", function()
 		fishlive.widget.exit_screen()
 	end, { description = "exit screen", group = "awesome" }),
 
-  -- change colorschemes
+	-- change colorschemes
 	awful.key({ modkey }, "c", function()
 		beautiful.menu_colorschemes_create():toggle()
 	end, { description = "show colorschemes menu", group = "awesome" }),
@@ -345,27 +331,27 @@ awful.keyboard.append_global_keybindings({
 		beautiful.menu_portrait_create():toggle()
 	end, { description = "show portrait menu for love tag", group = "awesome" }),
 
-  -- clipboard history
+	-- clipboard history
 	awful.key({ modkey }, "v", function()
 		awful.util.spawn_with_shell("clipmenu")
 	end, { description = "clipboard history by rofi/clipmenud", group = "awesome" }),
 
-  -- window switcher with rofi
+	-- window switcher with rofi
 	awful.key({ modkey }, "l", function()
 		awful.spawn("rofi -show-icons -modi windowcd,window,drun -show window")
 	end, { description = "show client list", group = "awesome" }),
 
-  -- rofi emoji selector
+	-- rofi emoji selector
 	awful.key({ modkey }, ",", function()
 		awful.spawn("rofimoji")
 	end, { description = "show emojis", group = "awesome" }),
 
-  -- reload awesome
+	-- reload awesome
 	awful.key({ modkey, ctrlkey }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 
 	-- awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
 
-  -- terminal open 
+	-- terminal open
 	awful.key({ modkey }, "space", function()
 		awful.util.spawn_with_shell("kitty")
 	end, { description = "open a terminal", group = "launcher" }),
@@ -405,7 +391,6 @@ awful.keyboard.append_global_keybindings({
 		end
 	end, { description = "restore minimized", group = "client" }),
 })
-
 
 -- Layout related keybindings
 awful.keyboard.append_global_keybindings({
@@ -778,7 +763,7 @@ ruled.client.connect_signal("request::rules", function()
 
 	ruled.client.append_rule({
 		rule_any = {
-			name = { "Firefox", "Brave", 'Zen Browser', 'zen-alpha', 'Zen-Browser' },
+			name = { "Firefox", "Brave", "Zen Browser", "zen-alpha", "Zen-Browser" },
 		},
 		properties = { opacity = 1, maximized = false, floating = false },
 	})
@@ -802,7 +787,6 @@ end)
 -- }}}
 
 -- {{{ Manage new client
-
 client.connect_signal("manage", function(c)
 	-- Similar behaviour as other window managers DWM, XMonad.
 	-- Master-Slave layout new client goes to the slave, master is kept
@@ -822,29 +806,18 @@ end)
 -- }}}
 
 -- {{{ Notifications
-
 ruled.notification.connect_signal("request::rules", function()
 	-- All notifications will match this rule.
 	ruled.notification.append_rule({
 		rule = {},
 		properties = {
 			screen = awful.screen.preferred,
-			implicit_timeout =3,
+			implicit_timeout = 1,
 		},
 	})
 end)
 
--- Store notifications to the file
-naughty.connect_signal("added", function(n)
-	-- local file = io.open(os.getenv("HOME") .. "/.config/awesome/naughty_history", "a")
-	-- file:write(n.title .. ": " .. n.id .. " " .. n.message .. "\n")
-	-- file:close()
-end)
-
--- }}}
-
 --{{{ Focusing
-
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
 	c:activate({ context = "mouse_enter", raise = false })
@@ -854,9 +827,8 @@ end)
 
 --{{{ Application Starts
 --awful.spawn.with_shell("~/.config/awesome/autorun.sh")
-awful.util.spawn_with_shell("flameshot")
+awful.util.spawn_with_shell("XDG_SESSION_TYPE=x11 flameshot")
 awful.util.spawn_with_shell("clipmenud &")
 awful.util.spawn_with_shell("blueman-applet &")
 awful.util.spawn_with_shell("nm-applet &")
 --}}}
-
